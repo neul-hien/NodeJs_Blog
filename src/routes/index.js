@@ -1,9 +1,9 @@
 import siteRouter from './site.js'
-import newsRouter from './news.js'
 import coursesRouter from './course.js'
+import meRouter from './me.js'
 function route(app){
-    app.use('/news',newsRouter )
     app.use('/course',coursesRouter )
+    app.use('/me',meRouter )
     app.use('/', siteRouter )
 
 }

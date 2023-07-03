@@ -1,0 +1,65 @@
+<div class="mt-4">
+    <h3>Khóa học của tôi</h3>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên khóa học</th>
+            <th scope="col">Thời gian tạo</th>
+            <th></th>
+            <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>
+                    <a href="/course/{{this._id}}/edit" type="button" class="btn btn-link">Sửa</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" data-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#delete-course-modal">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{!-- Start modal delete course --}}
+<div id="delete-course-modal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa khóa học?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn chắc chắn muốn xóa khóa học?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btnconfirmDelete" type="button" class="btn btn-danger">Xóa khóa học</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- End modal delete course --}}
+<script>
+    const deleteModel = document.getElementById('delete-course-modal')
+    const btnConfirmDelete = document.getElementById('btnconfirmDelete')
+    if (deleteModel) {
+        deleteModel.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            idCourse = button.getAttribute('data-id');
+        })
+    }
+    if (btnConfirmDelete) {
+        btnConfirmDelete.addEventListener('click', () => {
+            alert(idCourse);
+        });
+    }
+</script>
